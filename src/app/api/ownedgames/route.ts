@@ -7,7 +7,9 @@ export async function GET(request: NextRequest) {
   const endpoint = `http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${process.env.STEAM_ID}&format=json`;
 
   try {
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      cache: "reload",
+    });
 
     if (response.ok) {
       const data = await response.json();

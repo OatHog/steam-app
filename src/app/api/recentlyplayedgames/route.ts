@@ -8,11 +8,15 @@ export async function GET(request: NextRequest) {
   const endpoint = `http://api.steampowered.com/IPlayerService/GetRecentlyPlayedGames/v0001/?key=${process.env.STEAM_API_KEY}&steamid=${steamId}&format=json${count ? `&count=${count}` : ""}`;
 
   try {
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      cache: "reload",
+    });
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Steam API returned status: ${response.status}: ${errorText}`);
+      throw new Error(
+        `Steam API returned status: ${response.status}: ${errorText}`
+      );
     }
 
     const data = await response.json();
