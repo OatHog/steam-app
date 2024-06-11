@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, Suspense } from "react";
 import GameTile from "../components/GameTile";
 import useSWR from "swr";
 import Link from "next/link";
@@ -28,7 +28,7 @@ export default function Page({}: Props) {
     return <div>No games found.</div>;
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Link
         href="/"
         className="text-white text-xl font-bold hover:underline cursor-pointer flex flex-row mt-12 mx-24"
@@ -50,6 +50,6 @@ export default function Page({}: Props) {
           ))}
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
