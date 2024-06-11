@@ -50,6 +50,7 @@ export default function Page({}: Props) {
     return (
       <>
         <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+          <p className="m-3 mb-8 text-3xl">Recently played games</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {data.response.games.map((game: SteamGame) => (
               <GameTile
