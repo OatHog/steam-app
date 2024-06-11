@@ -18,7 +18,7 @@ export async function GET() {
 
   try {
     const response = await fetch(playersummaries_endpoint, {
-      cache: "no-store",
+      cache: "no-cache",
     });
     if (response.status === 200) {
       const steamData = await response.json();
