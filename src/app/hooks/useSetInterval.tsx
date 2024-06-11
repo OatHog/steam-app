@@ -4,7 +4,8 @@ import useSWR, { Fetcher, mutate } from "swr";
 export default function useIntervalFetch<Data = any>(
   url: string | null,
   interval: number,
-  fetcher: Fetcher<Data> = (...args) => fetch(...args).then((res) => res.json())
+  fetcher: Fetcher<Data> = (...args: Parameters<typeof fetch>) =>
+    fetch(...args).then((res) => res.json())
 ) {
   const { data, error, mutate } = useSWR<Data>(url, fetcher, {
     revalidateOnFocus: false, // Prevent automatic refetching on focus
