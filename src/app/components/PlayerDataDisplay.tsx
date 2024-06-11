@@ -14,7 +14,9 @@ export default function PlayerDataDisplay({ data, error, isLoading }: Props) {
     <main className="flex max-h-screen flex-col items-center p-24 text-white text-xl font-bold">
       <p className="m-3 mb-12">Welcome to my Steam API application.</p>
       <p className="font-normal">
-        Here I will be exploring the <strong>Steam API</strong>, both to familiarise myself with <strong>React</strong> as well as <strong>learning how to use APIs</strong> in general.
+        Here I will be exploring the <strong>Steam API</strong>, both to
+        familiarise myself with <strong>React</strong> as well as{" "}
+        <strong>learning how to use APIs</strong> in general.
         <br />
         <br />
         Click on a user`s name to view info about their owned games.
