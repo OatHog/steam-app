@@ -1,12 +1,30 @@
 "use client";
 
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import PlayerCard from "./components/PlayerCard";
 import { PlayerSummary } from "@/types/Player";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(`/api/playersummaries`, fetcher);
+
+  const [shouldFetch, setShouldFetch] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShouldFetch(true); // Trigger refetch
+    }, 300000); // Fetch every 5 minutes
+
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, []);
+
+  useEffect(() => {
+    if (shouldFetch) {
+      mutate([], false); // Manually trigger SWR to refetch without modifying data
+      setShouldFetch(false);
+    }
+  }, [shouldFetch]);
 
   if (error) return <div>Failed to load data: {error.message}</div>;
   if (isLoading) return <div>Loading...</div>;
