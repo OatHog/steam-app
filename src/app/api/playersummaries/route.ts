@@ -17,7 +17,9 @@ export async function GET() {
   const playersummaries_endpoint = `http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=${process.env.STEAM_API_KEY}&steamids=${steamIds}&format=json`;
 
   try {
-    const response = await fetch(playersummaries_endpoint);
+    const response = await fetch(playersummaries_endpoint, {
+      cache: "no-store",
+    });
     if (response.status === 200) {
       const steamData = await response.json();
       const players = steamData?.response?.players || [];

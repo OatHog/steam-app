@@ -1,7 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-import useIntervalFetch from "./hooks/useSetInterval";
 import PlayerDataDisplay from "./components/PlayerDataDisplay";
 import useSWR from "swr";
 
