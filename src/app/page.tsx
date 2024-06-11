@@ -8,6 +8,7 @@ export default function Home() {
   const { data, error, isLoading } = useSWR("/api/playersummaries", fetcher, {
     refreshInterval: 300000,
     // revalidateIfStale: true,
+    revalidateOnFocus: true,
   });
 
   return <PlayerDataDisplay data={data} error={error} isLoading={isLoading} />;
