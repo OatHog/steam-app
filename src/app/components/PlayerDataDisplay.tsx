@@ -17,7 +17,7 @@ export default function PlayerDataDisplay({ data, error, isLoading }: Props) {
         Here I will be exploring the <strong>Steam API</strong>, both to familiarise myself with <strong>React</strong> as well as <strong>learning how to use APIs</strong> in general.
         <br />
         <br />
-        Click on a user's name to view info about their owned games.
+        Click on a user`s name to view info about their owned games.
       </p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data.steam
