@@ -27,7 +27,7 @@ export default function PlayerCard({ player }: Props) {
         </div>
         <div className="my-auto ml-3">
           <Link
-            href={`/user?steamid=${player.getSteamId}`}
+            href={`/user?steamid=${player.getSteamId}&name=${player.getPersonName}`}
             className="text-md sm:text-xl text-white hover:underline cursor-pointer"
           >
             {player?.getPersonName
