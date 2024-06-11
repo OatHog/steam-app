@@ -6,6 +6,7 @@ import useSWR from "swr";
 import Link from "next/link";
 import { redirect, useSearchParams } from "next/navigation";
 import { IoArrowBack } from "react-icons/io5";
+import { Loader2 } from "lucide-react";
 
 type Props = {};
 
@@ -25,10 +26,26 @@ export default function Page({}: Props) {
       redirect("/");
     }
 
-    if (error) return <div>Failed to load data: {error.message}</div>;
-    if (isLoading) return <div>Loading...</div>;
+    if (error)
+      return (
+        <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+          Failed to load data: {error.message}
+        </div>
+      );
+
+    if (isLoading)
+      return (
+        <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+          <Loader2 className="text-white text-2xl" />
+        </div>
+      );
+
     if (!data || !data.response || !data.response.games)
-      return <div>No games found.</div>;
+      return (
+        <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+          No games found or player`s games are private.
+        </div>
+      );
 
     return (
       <>
