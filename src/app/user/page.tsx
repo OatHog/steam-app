@@ -22,10 +22,24 @@ export default function Page({}: Props) {
     redirect("/");
   }
 
-  if (error) return <div>Failed to load data: {error.message}</div>;
-  if (isLoading) return <div>Loading...</div>;
+  if (error)
+    return (
+      <Suspense>
+        <div>Failed to load data: {error.message}</div>
+      </Suspense>
+    );
+  if (isLoading)
+    return (
+      <Suspense>
+        <div>Loading...</div>
+      </Suspense>
+    );
   if (!data || !data.response || !data.response.games)
-    return <div>No games found.</div>;
+    return (
+      <Suspense>
+        <div>No games found.</div>
+      </Suspense>
+    );
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
