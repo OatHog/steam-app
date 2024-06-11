@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import useSWR from "swr";
 import PlayerCard from "./components/PlayerCard";
-import { Player, PlayerSummary } from "@/types/Player";
+import { PlayerSummary } from "@/types/Player";
 
 export default function Home() {
   const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
