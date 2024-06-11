@@ -8,7 +8,7 @@ import useSWR from "swr";
 export default function Home() {
   const fetcher = (url: string) => fetch(url).then((r) => r.json());
   const { data, error, isLoading } = useSWR("/api/playersummaries", fetcher, {
-    refreshInterval: 5000,
+    refreshInterval: 300000,
   });
 
   return <PlayerDataDisplay data={data} error={error} isLoading={isLoading} />;
