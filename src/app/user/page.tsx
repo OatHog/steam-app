@@ -44,7 +44,7 @@ export default function Page({}: Props) {
     if (!data || !data.response || !data.response.games)
       return (
         <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
-          No games found or player&apos;s games are private.
+          No games found or {playerName}&apos;s games are private.
         </div>
       );
 
