@@ -20,7 +20,11 @@ export default function Page({}: Props) {
     const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
     const { data, error, isLoading } = useSWR(
       `/api/recentlyplayedgames?steamid=${steamId}`,
-      fetcher
+      fetcher,
+      {
+        refreshInterval: 300000,
+        revalidateOnFocus: true,
+      }
     );
 
     if (!steamId) {
@@ -37,13 +41,13 @@ export default function Page({}: Props) {
     if (isLoading)
       return (
         <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
-          <Loader2 className="text-white text-2xl" />
+          <Loader2 className="text-white text-2xl animate-spin" />
         </div>
       );
 
     if (!data || !data.response || !data.response.games)
       return (
-        <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+        <div className="flex flex-col items-center m-24 mt-12 text-white text-2xl font-bold">
           No games found or {playerName}&apos;s games are private.
         </div>
       );

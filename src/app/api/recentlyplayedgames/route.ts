@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const response = await fetch(endpoint, {
-      cache: "reload",
+      cache: "no-cache",
     });
 
     if (!response.ok) {
