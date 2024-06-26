@@ -18,6 +18,7 @@ export default function Page({}: Props) {
     const playerName = searchParams.get("name");
 
     const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
+
     const { data, error, isLoading } = useSWR(
       `/api/recentlyplayedgames?steamid=${steamId}`,
       fetcher,
@@ -27,25 +28,38 @@ export default function Page({}: Props) {
       }
     );
 
+    const data2 = useSWR(`api/ownedgames?steamid=${steamId}`, fetcher, {
+      refreshInterval: 300000,
+      revalidateOnFocus: true,
+    });
+    console.dir(data);
+    console.dir(data2.data);
+
     if (!steamId) {
       redirect("/");
     }
 
-    if (error)
+    if (error || data2.error)
       return (
         <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
-          Failed to load data: {error.message}
+          Failed to load data: {data}
         </div>
       );
 
-    if (isLoading)
+    if (isLoading || data2.isLoading)
       return (
         <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
           <Loader2 className="text-white text-2xl animate-spin" />
         </div>
       );
 
-    if (!data || !data.response || !data.response.games)
+    if (
+      !data ||
+      !data.response ||
+      !data.response.games ||
+      !data2.data.response ||
+      !data2.data.response.games
+    )
       return (
         <div className="flex flex-col items-center m-24 mt-12 text-white text-2xl font-bold">
           No games found or {playerName}&apos;s games are private.
@@ -68,6 +82,32 @@ export default function Page({}: Props) {
                 twoWeekPlayTime={game.playtime_2weeks}
               />
             ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center m-24 mt-12 text-white text-xl font-bold">
+          <p className="m-3 mb-8 text-3xl underline">
+            {playerName}&apos;s owned games
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {data2.data.response.games
+              .slice()
+              .sort((a: any, b: any) => {
+                // Sort alphabetically by game name (case-insensitive)
+                const nameA = a.name.toLowerCase();
+                const nameB = b.name.toLowerCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+              })
+              .map((game: SteamGame) => (
+                <GameTile
+                  key={game.appid}
+                  gameName={game.name}
+                  gameIconUrl={game.img_icon_url}
+                  totalPlayTime={game.playtime_forever}
+                  twoWeekPlayTime={game.playtime_2weeks}
+                />
+              ))}
           </div>
         </div>
       </>
