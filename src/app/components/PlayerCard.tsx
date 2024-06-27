@@ -56,13 +56,13 @@ export default function PlayerCard({
                 className="text-md sm:text-xl text-white hover:underline cursor-pointer"
               >
                 {player?.getPersonName ? (
-                  <p className="mx-3">{player?.getPersonName}</p>
+                  <p className="mx-1">{player?.getPersonName}</p>
                 ) : (
                   "Loading user data..."
                 )}
               </Link>
               {player.getGames === false ? (
-                <p className="text-md sm:text-lg text-white font-semibold mx-3">
+                <p className="text-md sm:text-lg text-white font-semibold mx-1">
                   {player.getStatus
                     ? player.getStatus
                     : "Loading user status..."}

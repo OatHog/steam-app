@@ -9,7 +9,7 @@ type Props = {
 
 export default function SharedGameTile({ gameIconUrl, gameName }: Props) {
   return (
-    <div className="rounded-lg bg-white bg-gray-600/50 backdrop-blur-md p-4 max-w-sm w-full flex flex-col">
+    <div className="rounded-lg bg-gray-600/50 backdrop-blur-md p-4 max-w-sm w-full flex flex-col">
       {gameIconUrl && (
         <div className="justify-center items-center flex flex-col">
           <Image
