@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Player, PlayerSummary } from "@/types/Player";
@@ -14,10 +14,16 @@ export default function PlayerCard({
   isSelected,
   onPlayerSelection,
 }: Props) {
-  const [isChecked, setIsChecked] = React.useState(false);
+  const [isChecked, setIsChecked] = React.useState(isSelected);
+
+  useEffect(() => {
+    setIsChecked(isSelected);
+  }, [isSelected]);
 
   const handleCheckboxChange = () => {
+    // setIsChecked(!isChecked);
     onPlayerSelection(player);
+    console.log(`Is Checked: ${isSelected}`);
   };
 
   return (
@@ -25,7 +31,8 @@ export default function PlayerCard({
       <input
         id={`player-card-${player.getSteamId}`}
         type="checkbox"
-        className="mx-2 hidden peer"
+        className="mx-2 hidden"
+        checked={isSelected}
         onChange={handleCheckboxChange}
       />
       <label
@@ -33,7 +40,7 @@ export default function PlayerCard({
         className={`mt-2 inline-flex items-center justify-between w-full text-gray-500 bg-white border-2 
               rounded-md cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 
               peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 
-              dark:hover:bg-gray-700 peer-checked:border-blue-600 border-gray-200`}
+              dark:hover:bg-gray-700 ${isChecked ? "border-blue-600" : ""} border-gray-200`}
       >
         <div className="gap-4 w-full items-center backdrop-blur-md border-opacity-10 ">
           <div className="flex py-6 my-auto rounded-md mx-2">

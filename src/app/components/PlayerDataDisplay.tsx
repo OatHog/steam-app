@@ -25,6 +25,7 @@ export default function PlayerDataDisplay({ data, error, isLoading }: Props) {
   // Handle fetching shared games for selected users
   const [sharedGames, setSharedGames] = useState<SteamGame[]>([]);
 
+  // TODO: Figure out why this returns a 500 error so often.
   useEffect(() => {
     const fetchSharedGames = async () => {
       if (selectedPlayers.length === 0) {
@@ -66,7 +67,6 @@ export default function PlayerDataDisplay({ data, error, isLoading }: Props) {
     };
 
     fetchSharedGames();
-    console.dir(sharedGames);
   }, [selectedPlayers]);
 
   if (error) return <div>Failed to load data: {error.message}</div>;
