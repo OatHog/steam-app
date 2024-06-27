@@ -32,8 +32,6 @@ export default function Page({}: Props) {
       refreshInterval: 300000,
       revalidateOnFocus: true,
     });
-    console.dir(data);
-    console.dir(data2.data);
 
     if (!steamId) {
       redirect("/");
