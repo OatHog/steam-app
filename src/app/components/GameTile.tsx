@@ -22,6 +22,7 @@ export default function GameTile({
       {gameIconUrl && (
         <div className="justify-center items-center flex flex-col">
           <Image
+            unoptimized
             src={gameIconUrl}
             width={48}
             height={48}

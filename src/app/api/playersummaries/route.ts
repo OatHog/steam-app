@@ -10,6 +10,7 @@ export async function GET() {
     process.env.MARCUS_STEAM_ID,
     process.env.ZUBAIR_STEAM_ID,
     process.env.JOHN_STEAM_ID,
+    process.env.KAYLEIGH_STEAM_ID,
   ]
     .filter(Boolean)
     .join(",");

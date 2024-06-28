@@ -13,6 +13,7 @@ export default function SharedGameTile({ gameIconUrl, gameName }: Props) {
       {gameIconUrl && (
         <div className="justify-center items-center flex flex-col">
           <Image
+            unoptimized
             src={gameIconUrl}
             width={60}
             height={60}

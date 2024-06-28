@@ -9,6 +9,7 @@ type Props = {
   onPlayerSelection: (player: PlayerSummary) => void;
 };
 
+// TODO: Figure out why this selection isn't working.
 export default function PlayerCard({
   player,
   isSelected,
@@ -47,6 +48,7 @@ export default function PlayerCard({
             <div className="w-20 h-20 flex items-center justify-center rounded-lg">
               {player.getAvatar ? (
                 <Image
+                  unoptimized
                   className="rounded-lg"
                   src={player.getAvatar}
                   width={100}
